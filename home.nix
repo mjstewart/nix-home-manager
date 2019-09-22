@@ -1,11 +1,19 @@
 { config, pkgs, ... }:
 
+let
+
+  hsPackages = with pkgs.haskellPackages; [
+    cabal2nix
+    cabal-install
+    ghc
+    hlint
+    ghcid
+    dhall
+    dhall-json
+    dhall-lsp-server
+  ];
+in
 {
-  # Let Home Manager install and manage itself.
-  programs.home-manager = {
-    enable = true;
-    path = https://github.com/rycee/home-manager/archive/release-19.03.tar.gz;
-  };
 
   imports = [
     ./configs/git.nix
@@ -17,23 +25,33 @@
 
   home.packages = with pkgs; [
     openjdk12
-    maven 
+    maven
     xclip
     htop
-    jq 
+    jq
+    wget
     zip
-    unzip 
+    unzip
     tmux
     tree
     meld
-    google-chrome 
-    docker 
+    google-chrome
+    docker
     docker-compose
-    insomnia 
+    insomnia
     slack
-    vscode-with-extensions
-    dhall
-    dhall-json
+    # vscode-with-extensions
     fira-code
+    fira-code-symbols
+    fontconfig
   ];
+
+
+
+    # Let Home Manager install and manage itself.
+  programs.home-manager = {
+    enable = true;
+    path = https://github.com/rycee/home-manager/archive/release-19.03.tar.gz;
+  };
+
 }

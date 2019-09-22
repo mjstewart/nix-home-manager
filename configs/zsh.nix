@@ -9,9 +9,9 @@
 
     shellAliases = {
       mci = "mvn clean install -DskipTests";
-      mcit = "mvn clean install"; 
+      mcit = "mvn clean install";
       mcp = "mvn clean package -DskipTests";
-      mcpt = "mvn clean package"; 
+      mcpt = "mvn clean package";
     };
 
     oh-my-zsh = {

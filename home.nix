@@ -1,20 +1,6 @@
 { config, pkgs, ... }:
 
-let
-
-  hsPackages = with pkgs.haskellPackages; [
-    cabal2nix
-    cabal-install
-    ghc
-    hlint
-    ghcid
-    dhall
-    dhall-json
-    dhall-lsp-server
-  ];
-in
 {
-
   imports = [
     ./configs/git.nix
     ./configs/tmux.nix
@@ -36,22 +22,23 @@ in
     tree
     meld
     google-chrome
-    docker
+    # docker
     docker-compose
     insomnia
     slack
-    # vscode-with-extensions
     fira-code
     fira-code-symbols
     fontconfig
+    myHaskellEnv
+    myHies
   ];
 
-
-
-    # Let Home Manager install and manage itself.
+  # Let Home Manager install and manage itself.
   programs.home-manager = {
     enable = true;
     path = https://github.com/rycee/home-manager/archive/release-19.03.tar.gz;
   };
 
+  news.display = "silent";
+  # home.stateVersion = "19.09";
 }

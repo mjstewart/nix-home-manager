@@ -19,6 +19,8 @@
       theme = "robbyrussell";
       plugins = [
         "git"
+        "tmux"
+        "docker"
       ];
     };
   };

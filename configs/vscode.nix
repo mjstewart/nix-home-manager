@@ -3,6 +3,8 @@
 {
   programs.vscode = {
     enable = true;
+  #  haskell.enable = true;
+  #  haskell.hie.enable = true;
 
     userSettings = {
 

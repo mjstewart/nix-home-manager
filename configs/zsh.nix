@@ -5,7 +5,7 @@
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
-    defaultKeymap = "vicmd";
+    defaultKeymap = "viins";
 
     shellAliases = {
       mci = "mvn clean install -DskipTests";

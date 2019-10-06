@@ -63,7 +63,6 @@
     ];
   };
 
-
   snippets = {
     "exercise ignore contract id" = {
       prefix = "exercise_";

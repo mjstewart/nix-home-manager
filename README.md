@@ -20,7 +20,29 @@ nix-shell --pure -p haskell.compiler.ghc865 haskell.packages.ghc865.cabal-instal
 ```
 
 you can create `shell.nix` and using `mkShell` derivation to bootstrap a shell without having to do it via
-cli. 
+cli.
+
+
+# general nix tips
+
+everything is a derivation (recipe on how to build something). If an application isnt on nixpkgs, you can
+create it yourself like I did with `daml`.
+
+The general tip is that there are build phases, you can override them to suit your goals.
+https://nixos.org/nixpkgs/manual/#ssec-controlling-phases
+
+The interesting thing is, in the `fixup` phase, it will call this bash function `patchShebangs` which will
+make sure all bash scripts in a directory or file have their shebang bash `bash` referring to the nix store version.
+```
+patchShebangs fileA dirA dirB ...
+```
+
+There is also another function where you call specifiy the single file to replace something in.
+
+```
+substituteInPlace ./install.sh \
+  --replace '/usr/bin/env bash' ${bash}/bin/bash
+```
 
 # haskell
 
@@ -30,7 +52,7 @@ https://haskell-at-work.com/episodes/2018-05-13-introduction-to-cabal.html
 nix is used to manage dependencies rather than have stack do it
 
 
-### bootstrap a simple project, use cabal init. 
+### bootstrap a simple project, use cabal init.
 
 `--pure` - The `--pure` flag makes sure that you can only access the packages you have defined, so that you do not accidentally use global packages that you have installed on your system.
 
@@ -50,7 +72,7 @@ with ghc so you can import them into cabal build file.
 You will see there are often 2 variants of packages in the nix store, 1 within `haskellPackages.*`,
 and the other in the global package space.
 
-This statement is saying that I want `mtl`, `pandoc` available in ghc that I can `import` or declare 
+This statement is saying that I want `mtl`, `pandoc` available in ghc that I can `import` or declare
 as a dependency in the cabal file. To prove this
 
 **Note**: You might be curious as to the similarity to these
@@ -165,7 +187,7 @@ pkgs.runCommand "${pkgs.myVsCode.name}" {
  echo "$out/bin/code"
 
  wrapProgram $out/bin/code --prefix PATH : ${lib.makeBinPath [ hieWrapper ]}
-'' 
+''
 
 
  wrapProgram ${pkgs.myVsCode}/bin/code --prefix PATH : ${lib.makeBinPath [ hie ]}

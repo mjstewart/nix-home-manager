@@ -1,11 +1,13 @@
 { pkgs, ... }:
 
 let
-  overlays = import ./overlays.nix;
-  config = import ./config.nix;
-  vscode = import ./configs/vscode.nix pkgs;
+  p = import <nixpkgs> {};
 
-  # various haskell dev tools that IDE's might need them on the $PATH
+  config = import ./config.nix;
+  vscode = import ./apps/vscode.nix pkgs;
+  daml = p.callPackage ./apps/daml {};
+
+  # these are general haskell dev tools that can be used from CLI or within IDE.
   haskell-env = with pkgs.haskell.packages.${config.ghc.version}; [
     hlint
     brittany
@@ -24,14 +26,14 @@ let
 in
 {
   imports = [
-    ./configs/git.nix
-    ./configs/tmux.nix
-    ./configs/vim.nix
-    ./configs/zsh.nix
+    ./apps/git.nix
+    ./apps/tmux
+    ./apps/vim.nix
+    ./apps/zsh.nix
   ];
 
   nixpkgs.overlays = [
-    overlays
+    (import ./overlays.nix)
   ];
 
   home.packages = with pkgs; [
@@ -39,7 +41,7 @@ in
     openjdk12
     maven
 
-    # linux utils
+    # utils
     xclip
     htop
     jq
@@ -50,6 +52,7 @@ in
 
     # dev
     tmux
+    tmuxinator
     meld
     docker-compose
     insomnia
@@ -58,6 +61,9 @@ in
 
     # haskell
     haskell-ghc
+
+    #
+    daml
 
     # the usual stuff
     google-chrome
@@ -75,4 +81,6 @@ in
 
   home.file.".config/Code/User/settings.json".text = builtins.toJSON vscode.settings;
   home.file.".config/Code/User/snippets/my-snippets.json".text = builtins.toJSON vscode.snippets;
+
+  home.file.".tmuxinator.yml".source = ./apps/tmux/tmuxinator.yml;
 }

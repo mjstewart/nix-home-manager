@@ -1,7 +1,7 @@
-self: super: 
+self: super:
 {
    my-vscode = super.vscode-with-extensions.override {
-     
+
      vscodeExtensions = with self.vscode-extensions; [
        bbenoist.Nix
        justusadam.language-haskell
@@ -36,10 +36,10 @@ self: super:
         }
         {
           name = "daml";
-          version = "0.13.25";
+          version = "0.13.29";
           publisher = "digitalassetholdingsllc";
-          # nix-prefetch-url https://digitalassetholdingsllc.gallery.vsassets.io/_apis/public/gallery/publisher/digitalassetholdingsllc/extension/daml/0.13.25/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
-          sha256 = "0b1qag04j3zwvgln1x16z75y5gp22y5ixvdfrflzh7bgcclddnah";
+          # nix-prefetch-url https://digitalassetholdingsllc.gallery.vsassets.io/_apis/public/gallery/publisher/digitalassetholdingsllc/extension/daml/0.13.29/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
+          sha256 = "0c8ivagvcar88cc4pmvq8pyj03m5a98386v7kiqzc4i2mv063wa9";
         }
         {
           name = "dhall-lang";

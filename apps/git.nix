@@ -1,4 +1,4 @@
-{ pkgs, ... }: 
+{ pkgs, ... }:
 
 {
   programs.git = {
@@ -14,7 +14,7 @@
 	      lg = "log --graph --format='%Cred%h%Creset  %<|(15) %C(white)%s %<|(35) %Creset %Cgreen(%cr)%<|(55)  %C(blue)<%an>%Creset%C(yellow)%d%Creset'";
     };
     extraConfig = {
-      web = { 
+      web = {
         browser = "${pkgs.google-chrome}/bin/google-chrome";
       };
       core = {
@@ -32,9 +32,10 @@
       };
       mergetool = {
         cmd = "${pkgs.meld}/bin/meld $LOCAL $MERGED $REMOTE";
+        keepBackup = false;
       };
     };
-    
+
     ignores = [
       "*.swp"
       "*~"

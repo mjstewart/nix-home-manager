@@ -56,13 +56,11 @@ in
     meld
     docker-compose
     insomnia
-    # from overlays.nix
-    my-vscode
+    my-vscode # uses overlays.nix
+    jetbrains.idea-ultimate
 
     # haskell
     haskell-ghc
-
-    #
     daml
 
     # the usual stuff
@@ -83,4 +81,5 @@ in
   home.file.".config/Code/User/snippets/my-snippets.json".text = builtins.toJSON vscode.snippets;
 
   home.file.".tmuxinator.yml".source = ./apps/tmux/tmuxinator.yml;
+  home.file.".IntelliJIdea2019.2/config/templates/output.xml".source = ./apps/intellij/templates.xml;
 }

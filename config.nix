@@ -9,4 +9,5 @@
   };
 
   ghc.version = "ghc865";
+  daml.version = "0.13.29";
 }

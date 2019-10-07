@@ -8,7 +8,6 @@
 #
 #    `nix show-derivation hash`
 #
-#
 # 2. for derivation creation to be successful, we always need to create $out/bin
 #    $out is what nix provides for us to store the final built artifacts. Using bin
 #    as the convention enables other build phases to install in the nix path.

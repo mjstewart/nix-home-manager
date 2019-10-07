@@ -2,8 +2,57 @@
 
 This is my personal configuration for [home manager](https://github.com/rycee/home-manager)
 
-# TODO
-manually install docker
+# setup
+
+### 1. install nix
+
+### 2. install home-manager
+
+Run the initial setup which will build all the derivations which may take a while.
+
+```
+home-manager switch
+```
+
+### 3. install docker
+
+docker daemon cant connect when installing it via home-manager.
+https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+```
+sudo usermod -aG docker your-user
+```
+
+### 4. setup terminal
+
+Instruct the terminal to start `tmuxinator`.
+
+Create a custom launcher
+
+`right click panel > panel > add items > add a launcher > within the laucher add an xfce terminal`
+
+go into the configuration and then add this startup command
+
+```
+xfce4-terminal -e 'tmuxinator start'
+```
+
+### 5. intellij
+
+Tell intellij where openjdk is within the nix-store. You can find this out by doing
+
+```
+which java
+ls -ln ~/.nix-profile/bin | grep java
+
+# get the path from above, you'll notice its in the lib directory
+cd /nix/store/rj4ryx8xbwy1mmlv6l21ciqzak1v9dig-home-manager-path/lib
+```
+
+# other useful tips
+
+use `tmux list-windows` to find the custom layout syntax after building the layout you want within tmux.
+
 
 
 # nix-shell

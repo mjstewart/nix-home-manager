@@ -1,9 +1,12 @@
 { pkgs, ... }:
 
+
+# tmuxinator is used for layout management.
+# configure terminal to call 'tmuxinator start' which will read ~/.tmuxinator config and pass into tmux.
 {
   programs.tmux = {
     enable = true;
-    historyLimit = 5000;
+    historyLimit = 4999;
     extraConfig = ''
       # rebind key from ctrl b to ctrl a
       unbind C-b
@@ -11,11 +14,11 @@
       bind-key C-a send-prefix
 
       set-option -g default-shell ${pkgs.zsh}/bin/zsh
-      set -g status-keys vi
-      set-window-option -g mode-keys vi
 
       # reload tmux config
       bind r source-file ~/.tmux.conf \; display "Configuration Reloaded!"
+
+      bind -n C-k send-keys -R \; send-keys C-l \; clear-history
 
       set -g mouse on
       set -g default-terminal "tmux-256color"
@@ -35,7 +38,7 @@
 
       # theme
       set -g status-bg colour33
-      # set-window-option -g pane-active-border-style bg=colour33
+      set-window-option -g pane-active-border-style "bg=default fg=colour33"
     '';
   };
 }

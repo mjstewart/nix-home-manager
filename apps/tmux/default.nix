@@ -1,19 +1,18 @@
-{ pkgs, ... }:
-
+{ zsh }:
 
 # tmuxinator is used for layout management.
 # configure terminal to call 'tmuxinator start' which will read ~/.tmuxinator config and pass into tmux.
 {
   programs.tmux = {
     enable = true;
-    historyLimit = 4999;
+    historyLimit = 5000;
     extraConfig = ''
       # rebind key from ctrl b to ctrl a
       unbind C-b
       set-option -g prefix C-a
       bind-key C-a send-prefix
 
-      set-option -g default-shell ${pkgs.zsh}/bin/zsh
+      set-option -g default-shell ${zsh}/bin/zsh
 
       # reload tmux config
       bind r source-file ~/.tmux.conf \; display "Configuration Reloaded!"

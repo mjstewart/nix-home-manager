@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-
+{ fetchFromGitHub }:
 
 {
   programs.zsh = {
@@ -25,7 +24,7 @@
       {
         # nix-prefetch-url --unpack https://github.com/zsh-users/zsh-syntax-highlighting/archive/0.6.0.tar.gz
         name = "zsh-syntax-highlighting";
-        src = pkgs.fetchFromGitHub {
+        src = fetchFromGitHub {
           owner = "zsh-users";
           repo = "zsh-syntax-highlighting";
           rev = "0.6.0";

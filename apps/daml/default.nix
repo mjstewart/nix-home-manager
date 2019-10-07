@@ -16,8 +16,6 @@
 #    (source of tarball unpack) and copy it into $out. the fixPhase then rewrites all shebangs with the
 #    nix store bash version so all the daml install scripts would work without having bash errors. The build
 #    environment is pure, no reference to system deps is allowed.
-#
-
 let
  config = ''
    update-check: never

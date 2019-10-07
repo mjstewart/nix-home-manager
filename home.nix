@@ -1,11 +1,10 @@
 { pkgs, ... }:
 
 let
-  p = import <nixpkgs> {};
-
   config = import ./config.nix;
-  vscode = import ./apps/vscode.nix pkgs;
-  daml = p.callPackage ./apps/daml {};
+  vscodeConfig = pkgs.callPackage ./apps/vscode-config.nix {};
+
+  daml = pkgs.callPackage ./apps/daml {};
 
   # these are general haskell dev tools that can be used from CLI or within IDE.
   haskell-env = with pkgs.haskell.packages.${config.ghc.version}; [
@@ -25,16 +24,14 @@ let
 
 in
 {
-  imports = [
-    ./apps/git.nix
-    ./apps/tmux
-    ./apps/vim.nix
-    ./apps/zsh.nix
-  ];
-
   nixpkgs.overlays = [
     (import ./overlays.nix)
   ];
+
+  programs.git = (pkgs.callPackage ./apps/git.nix {}).programs.git;
+  programs.tmux = (pkgs.callPackage ./apps/tmux {}).programs.tmux;
+  programs.vim = (pkgs.callPackage ./apps/vim.nix {}).programs.vim;
+  programs.zsh = (pkgs.callPackage ./apps/zsh.nix {}).programs.zsh;
 
   home.packages = with pkgs; [
     # java
@@ -68,7 +65,6 @@ in
     slack
   ] ++ haskell-env;
 
-
   # Let Home Manager install and manage itself.
   programs.home-manager = {
     enable = true;
@@ -77,8 +73,8 @@ in
 
   news.display = "silent";
 
-  home.file.".config/Code/User/settings.json".text = builtins.toJSON vscode.settings;
-  home.file.".config/Code/User/snippets/my-snippets.json".text = builtins.toJSON vscode.snippets;
+  home.file.".config/Code/User/settings.json".text = builtins.toJSON vscodeConfig.settings;
+  home.file.".config/Code/User/snippets/my-snippets.json".text = builtins.toJSON vscodeConfig.snippets;
 
   home.file.".tmuxinator.yml".source = ./apps/tmux/tmuxinator.yml;
   home.file.".IntelliJIdea2019.2/config/templates/output.xml".source = ./apps/intellij/templates.xml;

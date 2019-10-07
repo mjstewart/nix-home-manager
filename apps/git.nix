@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ google-chrome, my-vscode, meld }:
 
 {
   programs.git = {
@@ -15,23 +15,23 @@
     };
     extraConfig = {
       web = {
-        browser = "${pkgs.google-chrome}/bin/google-chrome";
+        browser = "${google-chrome}/bin/google-chrome";
       };
       core = {
-        editor = "${pkgs.vscode}/bin/code --wait";
+        editor = "${my-vscode}/bin/code --wait";
       };
       diff = {
         tool = "meld";
       };
       difftool = {
         prompt = false;
-        cmd = "${pkgs.meld}/bin/meld $LOCAL $REMOTE";
+        cmd = "${meld}/bin/meld $LOCAL $REMOTE";
       };
       merge = {
         tool = "meld";
       };
       mergetool = {
-        cmd = "${pkgs.meld}/bin/meld $LOCAL $MERGED $REMOTE";
+        cmd = "${meld}/bin/meld $LOCAL $MERGED $REMOTE";
         keepBackup = false;
       };
     };

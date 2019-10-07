@@ -273,8 +273,98 @@ builtins.toString coreutils
 
 nix gives you a $out path which is pre calculated based on the inputs of the derivation. this is where your
 builder scripts will place the build artifacts. Think of $out as this nice safe place nix creates for you waiting
-for you to put your build artifact files. if you make your own derivation, you must make sure to create an
+for you to put your build artifact files.
+It's like Nix reserved a slot in the nix store for us, and we must fill it.
+
+if you make your own derivation, you must make sure to create an
 $out directory otherwise derivation will fail to be created.
 
 this means you can refer to other derivations by using "${pkgs.name}/bin" because the $out paths are already
 known since they are all determined by a hash of the derivation inputs.
+
+
+the .drv file is the representation of the build action to perform in order to build the out path.
+it has buildInputs which needs to be built before this .drv can be built.
+
+every attribute in the derivation attribute set, is available an as environment variable in the builder script.
+
+
+
+### dont use nix-env
+
+installing libraries with nix-env is not good practice. We prefer to have isolated environments for development.
+`nix-shell` is great for spinning up a isolated sandbox with all the dependencies you need without polluting
+your main system. use `nixos` or `home-manager` to manage system packages.
+
+
+
+### nix-collect-garbage
+
+during playing around, you'll likely create lots of generations so its good to do some clean up.
+
+
+The thing with garbage collecting is that previous generations can still hold a reference to the deleted
+package making it ineligble for garbage collection.
+
+```
+# install a package to try out
+nix-env -iA nixpkgs.bsdgames
+
+nix-store -q --roots `which fortune`
+# => look at the path to the store (it should be gone after nix-collect-garbage)
+
+# The nix-store command can be used to query the GC roots that refer to a given derivation. In this case, our current user environment does refer to bsd-games.
+nix-store -q --roots `which fortune`
+
+nix-env --list-generations
+
+
+# now try remove it
+
+nix-env -e bsd-games
+nix-collect-garbage
+
+ls -l ${the original nix-store location of bsdgames}
+```
+
+
+It wasnt removed because older profiles refer to this package. so we need to clean up and remove old profiles
+
+```
+# the -d option of nix-collect-garbage is used to delete old generations of all profiles, then collect garbage.
+nix-collect-garbage -d
+
+# I think something like this also does a similar thing
+ls -l /nix/var/nix/profiles/per-user/matt
+
+nix-env --delete-generations old
+
+home-manager generations
+home-manager (follow the prompts)
+
+```
+
+## use callPackage
+
+```
+given you have a .nix file (demo.nix) with a function
+
+{ a, b, c, d }:
+
+stdenv.mkDerivation {
+  ...
+}
+
+its annoying to have to pass this in manually at the callsite
+
+let
+  demo = import ./demo.nix with pkgs; { inherit a b c d };
+
+
+  # NEW
+  p = import <nixpkgs> {};
+  demo = p.callPackage demo { d = overrideThisPackageOnly; }
+
+  because input args and package names are often the same, this essentially just finds which args
+  you need for nixpkgs and calls the function for you automatically!
+```

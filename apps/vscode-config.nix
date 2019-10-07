@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib }:
 
 {
   settings = {
@@ -55,7 +55,7 @@
       ignoreRecommendations = true;
     };
 
-    ghcid.command = pkgs.lib.strings.concatStringsSep " " [
+    ghcid.command = lib.strings.concatStringsSep " " [
       "--command=cabal repl"
       "-S --clear --no-height-limit --reverse-errors"
       "--topmost"

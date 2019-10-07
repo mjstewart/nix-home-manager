@@ -1,0 +1,7 @@
+<templateSet group="output">
+  <template name="::sout" value="System.out::println" description="println method reference" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+</templateSet>

@@ -8,6 +8,11 @@
     enableAutosuggestions = true;
     enableCompletion = true;
 
+    # turn off this - WARNING: terminal is not fully functional
+    initExtra = ''
+      export TERM=xterm
+    '';
+
     shellAliases = {
       mci = "mvn clean install -DskipTests";
       mcit = "mvn clean install";

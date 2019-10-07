@@ -253,3 +253,28 @@ pkgs.runCommand "${pkgs.myVsCode.name}" {
         # dhall-json
         # dhall-lsp-server
     ]);
+
+
+
+
+# nix basics
+
+derivation `.drv` is a receipe describing what you want to build. Its really just an attribute set
+with a few special key=value pairs.
+
+you then 'realise' the derivation but executes the side effect of running the recipe to build something.
+
+the cool thing with nix is, each derivations default toString is to print out derivation path.
+
+```
+builtins.toString coreutils
+"${coreutils}"
+```
+
+nix gives you a $out path which is pre calculated based on the inputs of the derivation. this is where your
+builder scripts will place the build artifacts. Think of $out as this nice safe place nix creates for you waiting
+for you to put your build artifact files. if you make your own derivation, you must make sure to create an
+$out directory otherwise derivation will fail to be created.
+
+this means you can refer to other derivations by using "${pkgs.name}/bin" because the $out paths are already
+known since they are all determined by a hash of the derivation inputs.

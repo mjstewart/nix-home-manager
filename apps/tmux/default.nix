@@ -18,7 +18,12 @@
       # reload tmux config
       bind r source-file ~/.tmux.conf \; display "Configuration Reloaded!"
 
+      # clear the panel
       bind -n C-k send-keys -R \; send-keys C-l \; clear-history
+
+      # its annoying having 0 at the other end of the keyboard, so start at 1
+      set -g base-index 1
+      setw -g pane-base-index 1
 
       set -g mouse on
       set -g default-terminal "tmux-256color"

@@ -53,8 +53,6 @@ cd /nix/store/rj4ryx8xbwy1mmlv6l21ciqzak1v9dig-home-manager-path/lib
 
 use `tmux list-windows` to find the custom layout syntax after building the layout you want within tmux.
 
-
-
 # nix-shell
 
 `nix-shell` is perhaps one of the most valuable tools in the Nix toolset. In a sentence, it allows users to enter a sub-shell with specific Nix packages set-up in a sort-of virtual environment.
@@ -367,4 +365,16 @@ let
 
   because input args and package names are often the same, this essentially just finds which args
   you need for nixpkgs and calls the function for you automatically!
+```
+
+
+
+# create haskell project using cabal
+
+nix and cabal is all you need, no need for stack anymore
+
+```
+nix-shell --pure -p ghc cabal-install --run "cabal init"
+nix-shell --pure -p cabal2nix --run "cabal2nix ." > default.nix
+nix-shell --pure -p ghc ghcid which
 ```

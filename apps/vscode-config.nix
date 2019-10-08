@@ -54,13 +54,6 @@
     extensions = {
       ignoreRecommendations = true;
     };
-
-    ghcid.command = lib.strings.concatStringsSep " " [
-      "--command=cabal repl"
-      "-S --clear --no-height-limit --reverse-errors"
-      "--topmost"
-      "--color=always"
-    ];
   };
 
   snippets = {

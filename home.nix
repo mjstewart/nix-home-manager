@@ -74,7 +74,7 @@ in
   news.display = "silent";
 
   home.file.".config/Code/User/settings.json".text = builtins.toJSON vscodeConfig.settings;
-  home.file.".config/Code/User/snippets/my-snippets.json".text = builtins.toJSON vscodeConfig.snippets;
+  home.file.".config/Code/User/snippets/my.code-snippets".text = builtins.toJSON vscodeConfig.snippets;
 
   home.file.".tmuxinator.yml".source = ./apps/tmux/tmuxinator.yml;
   home.file.".IntelliJIdea2019.2/config/templates/output.xml".source = ./apps/intellij/templates.xml;

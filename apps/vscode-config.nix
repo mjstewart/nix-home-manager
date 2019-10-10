@@ -58,9 +58,10 @@
 
   snippets = {
     "exercise ignore contract id" = {
+      scope = "daml";
       prefix = "exercise_";
       body = [
-        "exercise_ \${1:contractId} \${2:Transfer} with \${3:newOwner} = \${4:value}"
+        "exercise \${1:contractId} \${2:Transfer} with \${3:newOwner} = \${4:value}"
         "$5"
       ];
     };

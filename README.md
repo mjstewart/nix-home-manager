@@ -371,10 +371,52 @@ let
 
 # create haskell project using cabal
 
-nix and cabal is all you need, no need for stack anymore
+nix and cabal is all you need, no need for stack anymore.
+
+
+
+## some useful commands
+
+To create a new haskell project. Note how I copy a ghcid configuration that nix home-manager creates.
+This is because its the only way to get the vs code extension to run ghcid with a custom command of using
+`cabal new-repl` rather than the defaul `cabal repl`.
+
+```
+mkdir my-project
+cd my-project
+nix-shell --pure -p ghc cabal-install --run "cabal init && cp ~/.ghcid ."
+```
 
 ```
 nix-shell --pure -p ghc cabal-install --run "cabal init"
 nix-shell --pure -p cabal2nix --run "cabal2nix ." > default.nix
 nix-shell --pure -p ghc ghcid which
+```
+
+The simplest way is to add `ghc-options` to the `cabal` file so its centralised in 1 place for ghcid to pickup.
+using cabal version 3
+
+```
+cabal-version:       3.0
+
+name:                m4
+version:             0.1.0.0
+build-type:          Simple
+extra-source-files:  CHANGELOG.md
+
+common shared-properties
+  default-language: Haskell2010
+  build-depends:
+    base >=4.12 && <4.13
+  ghc-options:
+    -Wall
+    -Wincomplete-record-updates
+    -Wincomplete-uni-patterns
+    -Wredundant-constraints
+    -ferror-spans
+
+executable m4
+  import: shared-properties
+  main-is:             Main.hs
+  other-modules:       Contra
 ```

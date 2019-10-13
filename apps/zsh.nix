@@ -1,4 +1,4 @@
-{ fetchFromGitHub }:
+{ lib, fetchFromGitHub, ghcidConfig }:
 
 {
   programs.zsh = {
@@ -17,16 +17,7 @@
       mcit = "mvn clean install";
       mcp = "mvn clean package -DskipTests";
       mcpt = "mvn clean package";
-      myghcid = "ghcid \
-        --command cabal repl \
-          --ghc-options=-Wall \
-          --ghc-options=-fno-code \
-          --ghc-options=-fno-break-on-exception \
-          --ghc-options=-fno-break-on-error \
-          --ghc-options=-ferror-spans \
-        --clear \
-        --no-height-limit \
-        --reverse-errors";
+      myghcid = "${ghcidConfig.cli}";
     };
 
     # .zshrc will get updated to source this plugin automatically

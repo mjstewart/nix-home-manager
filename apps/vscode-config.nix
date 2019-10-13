@@ -1,4 +1,4 @@
-{ lib }:
+{ lib, zsh }:
 
 {
   settings = {
@@ -54,6 +54,10 @@
     extensions = {
       ignoreRecommendations = true;
     };
+
+    update.mode = "none";
+
+    terminal.integrated.shell.linux = "${zsh}/bin/zsh";
   };
 
   snippets = {

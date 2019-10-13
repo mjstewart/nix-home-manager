@@ -3,6 +3,7 @@
 let
   config = import ./config.nix;
   vscodeConfig = pkgs.callPackage ./apps/vscode-config.nix {};
+  ghcidConfig = pkgs.callPackage ./apps/ghcid-config.nix {};
 
   daml = pkgs.callPackage ./apps/daml {};
 
@@ -31,7 +32,7 @@ in
   programs.git = (pkgs.callPackage ./apps/git.nix {}).programs.git;
   programs.tmux = (pkgs.callPackage ./apps/tmux {}).programs.tmux;
   programs.vim = (pkgs.callPackage ./apps/vim.nix {}).programs.vim;
-  programs.zsh = (pkgs.callPackage ./apps/zsh.nix {}).programs.zsh;
+  programs.zsh = (pkgs.callPackage ./apps/zsh.nix { inherit ghcidConfig; }).programs.zsh;
 
   home.packages = with pkgs; [
     # java
@@ -75,6 +76,7 @@ in
 
   home.file.".config/Code/User/settings.json".text = builtins.toJSON vscodeConfig.settings;
   home.file.".config/Code/User/snippets/my.code-snippets".text = builtins.toJSON vscodeConfig.snippets;
+  home.file.".ghcid".text = ghcidConfig.dotGhcidFile;
 
   home.file.".tmuxinator.yml".source = ./apps/tmux/tmuxinator.yml;
   home.file.".IntelliJIdea2019.2/config/templates/output.xml".source = ./apps/intellij/templates.xml;

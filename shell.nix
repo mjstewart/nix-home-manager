@@ -3,12 +3,12 @@
 let
   ghcVersion = "ghc865";
 
-  haskell-ghc = pkgs.haskell.packages.${ghcVersion}.ghcWithPackages 
-    (p: [ 
+  haskell-ghc = pkgs.haskell.packages.${ghcVersion}.ghcWithPackages
+    (p: [
       p.mtl
-      p.lens 
+      p.lens
    ]);
-   
+
   haskell-env = with pkgs.haskell.packages.${ghcVersion}; [
     hlint
     brittany
@@ -17,10 +17,11 @@ let
     dhall
     cabal-install
   ];
-      
-in 
+
+in
   pkgs.mkShell {
     buildInputs = with pkgs; [
       haskell-ghc
+      vim
     ] ++ haskell-env;
   }

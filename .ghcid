@@ -1,4 +1,0 @@
---command "cabal repl --ghc-options=-Wall --ghc-options=-fno-code --ghc-options=-fno-break-on-exception --ghc-options=-fno-break-on-error"
---clear
---no-height-limit
---reverse-errors

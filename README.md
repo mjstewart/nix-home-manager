@@ -381,6 +381,9 @@ To create a new haskell project. Note how I copy a ghcid configuration that nix 
 This is because its the only way to get the vs code extension to run ghcid with a custom command of using
 `cabal new-repl` rather than the defaul `cabal repl`.
 
+The issue with ghcid is that when you try use it with multiple modules sometimes it refreshes with only 1 module active. You need to go to another module, make a type and this will reload it and pick back up the other modules...
+
+
 ```
 mkdir my-project
 cd my-project
@@ -414,6 +417,8 @@ common shared-properties
     -Wincomplete-uni-patterns
     -Wredundant-constraints
     -ferror-spans
+    -fno-break-on-exception
+    -fno-break-on-error
 
 executable m4
   import: shared-properties

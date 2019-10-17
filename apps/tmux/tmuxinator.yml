@@ -3,7 +3,7 @@ root: ~/
 
 windows:
   - editor:
-      layout: 4f1b,192x45,0,0{95x45,0,0,1,96x45,96,0,5}
+      layout: ba68,192x45,0,0[192x22,0,0,3,192x22,0,23,5]
       panes:
         -
         -

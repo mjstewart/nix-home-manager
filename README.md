@@ -6,6 +6,17 @@ This is my personal configuration for [home manager](https://github.com/rycee/ho
 
 ### 1. install nix
 
+You need to add this to .bashrc so nix is added to the path so we can access the nix packages.
+
+```
+# add nix to the path and then start the tmuxinator which is nix based
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+  source $HOME/.nix-profile/etc/profile.d/nix.sh
+  tmuxinator
+fi
+```
+
+
 ### 2. install home-manager
 
 Run the initial setup which will build all the derivations which may take a while.

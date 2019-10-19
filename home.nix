@@ -14,6 +14,7 @@ let
     ghcid
     hoogle
     dhall
+    cabal-install
   ];
 
   # tell ghc to register these additional libraries

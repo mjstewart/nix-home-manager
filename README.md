@@ -394,6 +394,7 @@ This is because its the only way to get the vs code extension to run ghcid with 
 
 The issue with ghcid is that when you try use it with multiple modules sometimes it refreshes with only 1 module active. You need to go to another module, make a type and this will reload it and pick back up the other modules...
 
+`cabal-install` is the cabal cli tool.
 
 ```
 mkdir my-project
@@ -404,7 +405,7 @@ nix-shell --pure -p ghc cabal-install --run "cabal init && cp ~/.ghcid ."
 ```
 nix-shell --pure -p ghc cabal-install --run "cabal init"
 nix-shell --pure -p cabal2nix --run "cabal2nix ." > default.nix
-nix-shell --pure -p ghc ghcid which
+nix-shell --pure -p ghc ghcid cabal-install which 
 ```
 
 The simplest way is to add `ghc-options` to the `cabal` file so its centralised in 1 place for ghcid to pickup.

@@ -12,6 +12,9 @@
       trimFinalNewlines = true;
       insertFinalNewline = true;
       trimTrailingWhitespace = true;
+      associations = {
+        "*.hs" = "haskell";
+      };
     };
 
     exclude = {

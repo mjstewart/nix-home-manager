@@ -40,7 +40,10 @@
       editor = {
         highlightModifiedTabs = true;
       };
+      panel.defaultLocation = "right";
+      tree.indent = 20;
     };
+
 
     search = {
       location = "panel";
@@ -70,4 +73,17 @@
       ];
     };
   };
+
+  keybindings = [
+    {
+      key = "shift+,";
+      command = "workbench.action.focusActiveEditorGroup";
+      when ="terminalFocus";
+    }
+    {
+      key = "shift+,";
+      command = "workbench.action.terminal.focus";
+      when = "!terminalFocus";
+    }
+  ];
 }

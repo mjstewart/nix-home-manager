@@ -75,6 +75,7 @@ in
   news.display = "silent";
 
   home.file.".config/Code/User/settings.json".text = builtins.toJSON vscodeConfig.settings;
+  home.file.".config/Code/User/keybindings.json".text = builtins.toJSON vscodeConfig.keybindings;
   home.file.".config/Code/User/snippets/my.code-snippets".text = builtins.toJSON vscodeConfig.snippets;
   home.file.".ghcid".text = ghcidConfig.dotGhcidFile;
 

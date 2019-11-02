@@ -10,7 +10,6 @@ let
   # these are general haskell dev tools that can be used from CLI or within IDE.
   haskell-env = with pkgs.haskell.packages.${config.ghc.version}; [
     hlint
-    brittany
     ghcid
     hoogle
     dhall

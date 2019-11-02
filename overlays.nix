@@ -55,13 +55,6 @@ self: super:
           # nix-prefetch-url https://ndmitchell.gallery.vsassets.io/_apis/public/gallery/publisher/ndmitchell/extension/haskell-ghcid/0.2.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
           sha256 = "16ibf8ckcmsq000qlvn34ki16qxyvd2wcd76kpjbfk6p3jfcakca";
         }
-        {
-          name = "brittany";
-          version = "0.0.8";
-          publisher = "maxgabriel";
-          # nix-prefetch-url https://maxgabriel.gallery.vsassets.io/_apis/public/gallery/publisher/maxgabriel/extension/brittany/0.0.8/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
-          sha256 = "1h66g85hdaj7j0wlkdh2ncnf404wq6lssmfl8ar5bbrwv7c6n3ah";
-        }
       ];
    };
 }

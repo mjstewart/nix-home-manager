@@ -76,12 +76,12 @@
 
   keybindings = [
     {
-      key = "shift+,";
+      key = "ctrl+,";
       command = "workbench.action.focusActiveEditorGroup";
       when ="terminalFocus";
     }
     {
-      key = "shift+,";
+      key = "ctrl+,";
       command = "workbench.action.terminal.focus";
       when = "!terminalFocus";
     }

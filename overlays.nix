@@ -55,6 +55,13 @@ self: super:
           # nix-prefetch-url https://ndmitchell.gallery.vsassets.io/_apis/public/gallery/publisher/ndmitchell/extension/haskell-ghcid/0.2.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
           sha256 = "16ibf8ckcmsq000qlvn34ki16qxyvd2wcd76kpjbfk6p3jfcakca";
         }
+        {
+          name = "better-align";
+          version = "1.1.6";
+          publisher = "wwm";
+          # nix-prefetch-url https://wwm.gallery.vsassets.io/_apis/public/gallery/publisher/wwm/extension/better-align/1.1.6/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
+          sha256 = "1ldvpava9xlqy3zwwc0c04pk9dh09jwcwz5lk3b2cr1z8bxn54lh";
+        }
       ];
    };
 }

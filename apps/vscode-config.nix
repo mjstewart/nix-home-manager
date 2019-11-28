@@ -61,6 +61,7 @@
     update.mode = "none";
 
     terminal.integrated.shell.linux = "${zsh}/bin/zsh";
+    alignment.operatorPadding = "left";
   };
 
   snippets = {

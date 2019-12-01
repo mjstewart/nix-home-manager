@@ -1,0 +1,2 @@
+:def! hoogle \s -> return $ ":! hoogle search --colour --count=15 \"" ++ s ++ "\""
+:def! doc \s -> return $ ":! hoogle search --colour --info \"" ++ s ++ "\""

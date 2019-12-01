@@ -64,6 +64,7 @@ in
     # the usual stuff
     google-chrome
     slack
+
   ] ++ haskell-env;
 
   # Let Home Manager install and manage itself.
@@ -78,6 +79,7 @@ in
   home.file.".config/Code/User/keybindings.json".text = builtins.toJSON vscodeConfig.keybindings;
   home.file.".config/Code/User/snippets/my.code-snippets".text = builtins.toJSON vscodeConfig.snippets;
   home.file.".ghcid".text = ghcidConfig.dotGhcidFile;
+  home.file.".ghci".source = ./apps/ghci;
 
   home.file.".tmuxinator.yml".source = ./apps/tmux/tmuxinator.yml;
   home.file.".IntelliJIdea2019.2/config/templates/output.xml".source = ./apps/intellij/templates.xml;

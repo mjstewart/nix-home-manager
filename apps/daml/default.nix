@@ -21,12 +21,12 @@ let
    update-check: never
  '';
 
- version = "0.13.30";
+ version = "0.13.38";
 
  # Each version upgrade, manually get the hash, or do a typo in the hash and let nix tell you what it should be.
  # If you are using prefetch, make the sure --name and mkDerivation.name match since prefetch caches it by this name.
- # nix-prefetch-url --unpack --print-path --name daml-sdk https://github.com/digital-asset/daml/releases/download/v0.13.30/daml-sdk-0.13.30-linux.tar.gz
- sha256 = "0k82ykkzpys73zr9fmqiy9x4dwx9lij7cnj1jq9m1hj3xyskfrpz";
+ # nix-prefetch-url --unpack --print-path --name daml-sdk https://github.com/digital-asset/daml/releases/download/v0.13.38/daml-sdk-0.13.38-linux.tar.gz
+ sha256 = "1l66fzbph6wcsk24xbdvgx8d168q30rry9jy8n67gfw98yhy669z";
 
  url = "https://github.com/digital-asset/daml/releases/download/v${version}/daml-sdk-${version}-linux.tar.gz";
 in

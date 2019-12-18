@@ -8,10 +8,10 @@ self: super:
     ] ++ self.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "vim";
-          version = "1.10.2";
+          version = "1.11.3";
           publisher = "vscodevim";
-          # nix-prefetch-url https://vscodevim.gallery.vsassets.io/_apis/public/gallery/publisher/vscodevim/extension/vim/1.10.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
-          sha256 = "0nvn4kv0dsqd67qz49jxrn0lyqvs63g1ahqbf16qcj9pzzkhk4y7";
+          # nix-prefetch-url https://vscodevim.gallery.vsassets.io/_apis/public/gallery/publisher/vscodevim/extension/vim/1.11.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
+          sha256 = "1smzsgcrkhghbnpy51gp28kh74l7y4s2m8pfxabb4ffb751254j0";
         }
         {
           name = "vscode-docker";
@@ -22,10 +22,10 @@ self: super:
         }
         {
           name = "vscode-xml";
-          version = "0.9.0";
+          version = "0.9.1";
           publisher = "redhat";
-          # nix-prefetch-url https://redhat.gallery.vsassets.io/_apis/public/gallery/publisher/redhat/extension/vscode-xml/0.9.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
-          sha256 = "0v29ap0y1fbvfi9m29v5n00x8r75l5dd5dshhmw3psl47b61fp9h";
+          # nix-prefetch-url https://redhat.gallery.vsassets.io/_apis/public/gallery/publisher/redhat/extension/vscode-xml/0.9.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
+          sha256 = "12nl2wm01y6kv4csnfz8hgkf227k5vkpnzcnfyr8cxd11wkb5nna";
         }
         {
           name = "vscode-proto3";
@@ -36,10 +36,10 @@ self: super:
         }
         {
           name = "daml";
-          version = "0.13.29";
+          version = "0.13.40";
           publisher = "digitalassetholdingsllc";
-          # nix-prefetch-url https://digitalassetholdingsllc.gallery.vsassets.io/_apis/public/gallery/publisher/digitalassetholdingsllc/extension/daml/0.13.29/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
-          sha256 = "0c8ivagvcar88cc4pmvq8pyj03m5a98386v7kiqzc4i2mv063wa9";
+          # nix-prefetch-url https://digitalassetholdingsllc.gallery.vsassets.io/_apis/public/gallery/publisher/digitalassetholdingsllc/extension/daml/0.13.40/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
+          sha256 = "1dwy1cv8jbdd1c2hk9psgbhaw4q4dklmssqdi1lz2jcf0ibb0676";
         }
         {
           name = "dhall-lang";

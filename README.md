@@ -60,6 +60,14 @@ ls -ln ~/.nix-profile/bin | grep java
 cd /nix/store/rj4ryx8xbwy1mmlv6l21ciqzak1v9dig-home-manager-path/lib
 ```
 
+### 6. google-chrome-stable
+
+Create a custom launcher with this command
+
+```
+google-chrome-stable --password-store=basic
+```
+
 # other useful tips
 
 use `tmux list-windows` to find the custom layout syntax after building the layout you want within tmux.
@@ -405,7 +413,7 @@ nix-shell --pure -p ghc cabal-install --run "cabal init && cp ~/.ghcid ."
 ```
 nix-shell --pure -p ghc cabal-install --run "cabal init"
 nix-shell --pure -p cabal2nix --run "cabal2nix ." > default.nix
-nix-shell --pure -p ghc ghcid cabal-install which 
+nix-shell --pure -p ghc ghcid cabal-install which
 ```
 
 The simplest way is to add `ghc-options` to the `cabal` file so its centralised in 1 place for ghcid to pickup.

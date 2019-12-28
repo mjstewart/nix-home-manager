@@ -56,6 +56,7 @@ in
     insomnia
     my-vscode # uses overlays.nix
     jetbrains.idea-ultimate
+    graphviz
 
     # haskell
     haskell-ghc

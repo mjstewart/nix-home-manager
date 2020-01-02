@@ -57,6 +57,7 @@ in
     my-vscode # uses overlays.nix
     jetbrains.idea-ultimate
     graphviz
+    nodejs-12_x
 
     # haskell
     haskell-ghc

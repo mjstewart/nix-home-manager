@@ -72,6 +72,14 @@ google-chrome-stable --password-store=basic
 
 use `tmux list-windows` to find the custom layout syntax after building the layout you want within tmux.
 
+
+# Upgrading packages
+
+``` 
+nix-channel --update
+home-manager switch
+```
+
 # nix-shell
 
 `nix-shell` is perhaps one of the most valuable tools in the Nix toolset. In a sentence, it allows users to enter a sub-shell with specific Nix packages set-up in a sort-of virtual environment.
@@ -163,6 +171,7 @@ nix-shell --pure  -p "haskell.packages.ghc865.ghcWithPackages (haskellPackages: 
 ```
 
 
+nix-shell --pure  -p "haskell.packages.ghc865.ghcWithPackages (haskellPackages: with haskellPackages; [ megaparsec ])"
 
 
 You can use the `cabal new-*` commands to to anything else

@@ -18,7 +18,7 @@
         browser = "${google-chrome}/bin/google-chrome";
       };
       core = {
-        editor = "${my-vscode}/bin/code --wait";
+        editor = "vim";
       };
       diff = {
         tool = "meld";

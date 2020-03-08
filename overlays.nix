@@ -36,10 +36,10 @@ self: super:
         }
         {
           name = "daml";
-          version = "0.13.40";
+          version = "0.13.46";
           publisher = "digitalassetholdingsllc";
-          # nix-prefetch-url https://digitalassetholdingsllc.gallery.vsassets.io/_apis/public/gallery/publisher/digitalassetholdingsllc/extension/daml/0.13.40/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
-          sha256 = "1dwy1cv8jbdd1c2hk9psgbhaw4q4dklmssqdi1lz2jcf0ibb0676";
+          # nix-prefetch-url https://digitalassetholdingsllc.gallery.vsassets.io/_apis/public/gallery/publisher/digitalassetholdingsllc/extension/daml/0.13.46/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
+          sha256 = "08km1cjhari2wqjmwsc80vz8kf3sx8ddlrm2n6wimi1lz0kf12v2";
         }
         {
           name = "dhall-lang";

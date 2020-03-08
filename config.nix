@@ -8,5 +8,5 @@
     enablePepperFlash = true;
   };
 
-  ghc.version = "ghc865";
+  ghc.version = "ghc882";
 }

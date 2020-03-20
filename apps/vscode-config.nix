@@ -28,6 +28,7 @@
 
     editor = {
       tabSize = 2;
+      rulers = [ 120 ];
       accessibilitySupport = "off";
       minimap.enabled = false;
       formatOnPaste = true;

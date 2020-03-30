@@ -40,6 +40,7 @@
     workbench = {
       editor = {
         highlightModifiedTabs = true;
+        enablePreview = false;
       };
       panel.defaultLocation = "right";
       tree.indent = 20;

@@ -53,6 +53,9 @@ in
       # symlink lets nix install daml in the nix path. see `which daml`.
       ln -s $out/.daml/bin/daml $out/bin
 
+      # daml studio needs to write access
+      chmod -R +w $out/.daml
+
       echo ${config} >> $out/.daml/daml-config.yaml
     '';
   }

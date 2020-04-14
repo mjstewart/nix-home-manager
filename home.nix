@@ -14,6 +14,7 @@ let
     hoogle
     dhall
     cabal-install
+    ormolu
   ];
 
   # tell ghc to register these additional libraries

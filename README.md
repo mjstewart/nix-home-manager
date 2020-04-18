@@ -2,6 +2,33 @@
 
 This is my personal configuration for [home manager](https://github.com/rycee/home-manager)
 
+# tips
+
+### updating nix channels
+
+```
+nix-channel --update
+home-manager switch
+```
+
+### cachix
+
+```
+nix-env -iA cachix -f https://cachix.org/api/v1/install
+
+```
+
+### ghc
+
+ghc version has its own packages. Be careful, if you use a new ghc, you could get errors since older packages
+might not support this ghc yet.
+
+```
+{ compiler ? "ghc883" }:
+
+pkgs.haskell.packages."${compiler}"
+```
+
 # setup
 
 ### 1. install nix
@@ -75,7 +102,7 @@ use `tmux list-windows` to find the custom layout syntax after building the layo
 
 # Upgrading packages
 
-``` 
+```
 nix-channel --update
 home-manager switch
 ```

@@ -13,8 +13,8 @@ let
     ghcid
     hoogle
     dhall
-    cabal-install
     ormolu
+    cabal-install
   ];
 
   # tell ghc to register these additional libraries
@@ -22,6 +22,7 @@ let
     (p: [
       p.mtl
       p.lens
+      p.hspec
    ]);
 
 in

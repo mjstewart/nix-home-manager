@@ -35,6 +35,8 @@
       formatOnSave = true;
       cursorBlinking = "solid";
       lineNumbers = "relative";
+      renderControlCharacters = "true";
+      renderWhitespace = "boundary";
     };
 
     workbench = {

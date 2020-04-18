@@ -37,7 +37,7 @@ in
 
   home.packages = with pkgs; [
     # java
-    openjdk12
+    jdk13
     maven
 
     # utils

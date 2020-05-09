@@ -6,9 +6,29 @@ This is my personal configuration for [home manager](https://github.com/rycee/ho
 
 ### updating nix channels
 
+make sure nix channel is set to the latest, otherwise you could be referring to old
+package versions.
+
+eg: see what versions are current by checking.
+
+https://nixos.org/nixos/packages.html
+https://github.com/rycee/home-manager
+
+eg if `nixos-20.03` is latest then its likely you will want to update home manager
+channel to use this.
+
 ```
+nix-channel --add https://github.com/rycee/home-manager/archive/release-20.03.tar.gz home-manager
 nix-channel --update
 home-manager switch
+```
+
+Also may need to increase size of `tmpfs`, as nix uses this as part of building the store.
+look for something like /run/user/1000
+
+```
+df -h
+sudo mount -o remount,size=2G /run/user/1000
 ```
 
 ### cachix

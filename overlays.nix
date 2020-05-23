@@ -4,8 +4,14 @@ self: super:
 
      vscodeExtensions = with self.vscode-extensions; [
        bbenoist.Nix
-       justusadam.language-haskell
     ] ++ self.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "language-haskell";
+          version = "3.2.1";
+          publisher = "justusadam";
+          # nix-prefetch-url https://vscodevim.gallery.vsassets.io/_apis/public/gallery/publisher/justusadam/extension/language-haskell/3.2.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
+          sha256 = "0lxp8xz17ciy93nj4lzxqvz71vw1zdyamrnh2n792yair8890rr6";
+        }
         {
           name = "vim";
           version = "1.13.1";
@@ -36,10 +42,10 @@ self: super:
         }
         {
           name = "daml";
-          version = "1.0.1";
+          version = "1.1.1";
           publisher = "digitalassetholdingsllc";
-          # nix-prefetch-url https://digitalassetholdingsllc.gallery.vsassets.io/_apis/public/gallery/publisher/digitalassetholdingsllc/extension/daml/1.0.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
-          sha256 = "03wjfwacr7c1spvbwm2im6n36dy02vkbsca7bqznk7nv8lr2v6kk";
+          # nix-prefetch-url https://digitalassetholdingsllc.gallery.vsassets.io/_apis/public/gallery/publisher/digitalassetholdingsllc/extension/daml/1.1.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
+          sha256 = "0shjrd6dgfrm141r43yzd4zrmb835ck9g21dg37d0wf057z8j9a1";
         }
         {
           name = "dhall-lang";

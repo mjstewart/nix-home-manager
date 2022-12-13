@@ -1,85 +1,152 @@
-{ pkgs, ... }:
+# lib is the standard lib, contains all the useful functions. normally you'd do with lib;
+{ pkgs, lib, config, ... }:
 
 let
-  config = import ./config.nix;
-  vscodeConfig = pkgs.callPackage ./apps/vscode-config.nix {};
-  ghcidConfig = pkgs.callPackage ./apps/ghcid-config.nix {};
-
-  daml = pkgs.callPackage ./apps/daml {};
-
-  # these are general haskell dev tools that can be used from CLI or within IDE.
-  haskell-env = with pkgs.haskell.packages.${config.ghc.version}; [
-    hlint
-    ghcid
-    hoogle
-    dhall
-    ormolu
-    cabal-install
-  ];
-
-  # tell ghc to register these additional libraries
-  haskell-ghc = pkgs.haskell.packages.${config.ghc.version}.ghcWithPackages
-    (p: [
-      p.mtl
-      p.lens
-      p.hspec
-   ]);
-
+  vscodeConfig = pkgs.callPackage ./apps/vscode/config.nix { };
+  ghcidConfig = pkgs.callPackage ./apps/haskell/ghcid-config.nix { };
 in
 {
-  nixpkgs.overlays = [
-    (import ./overlays.nix)
-  ];
+  programs.home-manager.enable = true;
 
-  programs.git = (pkgs.callPackage ./apps/git.nix {}).programs.git;
-  programs.tmux = (pkgs.callPackage ./apps/tmux {}).programs.tmux;
-  programs.vim = (pkgs.callPackage ./apps/vim.nix {}).programs.vim;
+  # nixpkgs.overlays = [
+  #   (import ./overlays.nix)
+  # ];
+
+  programs.lazygit.enable = true;
+  programs.zoxide.enable = true;
+  programs.fzf.enable = true;
+  programs.bat.enable = true;
+  programs.git = (pkgs.callPackage ./apps/git.nix { }).programs.git;
   programs.zsh = (pkgs.callPackage ./apps/zsh.nix { inherit ghcidConfig; }).programs.zsh;
 
+  programs.vscode = {
+    enable = true;
+    keybindings = (import ./apps/vscode/keybindings.nix);
+    userSettings = vscodeConfig.settings;
+    userTasks = {
+      version = "2.0.0";
+      tasks = [
+        {
+          type = "shell";
+          label = "Hello task";
+          command = "echo hello";
+        }
+      ];
+    };
+    extensions = with pkgs.vscode-extensions; [
+      bbenoist.nix
+      vscodevim.vim
+      haskell.haskell
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      # to get the hashes, rerun home manager and get expected hash
+      {
+        name = "nix-ide";
+        version = "0.2.1";
+        publisher = "jnoortheen";
+        sha256 = "sha256-yC4ybThMFA2ncGhp8BYD7IrwYiDU3226hewsRvJYKy4=";
+      }
+      {
+        name = "haskell-ghcid";
+        version = "0.3.1";
+        publisher = "ndmitchell";
+        sha256 = "1rivzlk32x7vq84ri426nhd6a4nv3h7zp7xcsq31d0kp8bqczvi9";
+      }
+      {
+        name = "better-align";
+        version = "1.1.6";
+        publisher = "wwm";
+        sha256 = "1ldvpava9xlqy3zwwc0c04pk9dh09jwcwz5lk3b2cr1z8bxn54lh";
+      }
+    ];
+  };
+
+
+  programs.neovim = {
+    enable = true;
+    vimAlias = true;
+    #extraConfig = builtins.readFile ./home/extraConfig.vim;
+    plugins = with pkgs.vimPlugins; [
+      auto-pairs
+      fzf-vim
+      vim-nix
+    ];
+  };
+
+  programs.kitty = {
+    # disabled due to some issue with needing opengl version 3.3
+    enable = false;
+    settings = {
+      font_size = 14;
+      font_family = "JetBrainsMono";
+      copy_on_select = "yes";
+      cursor_shape = "block";
+      cursor_blink_interval = 0;
+      enable_audio_bell = "no";
+      shell = "zsh";
+      editor = "nvim";
+      window_padding_width = 5;
+      tab_title_template = "{index}";
+      tab_bar_style = "powerline";
+      tab_powerline_style = "angled";
+      enabled_layouts = "vertical";
+    };
+    keybindings = {
+      "ctrl+left" = "neighboring_window left";
+      "ctrl+up" = "neighboring_window top";
+      "ctrl+right" = "neighboring_window right";
+      "ctrl+down" = "neighboring_window down";
+
+      "shift+left" = "resize_window narrower";
+      "shift+right" = "resize_window wider";
+      "shift+up" = "resize_window taller 3";
+      "shift+down" = "resize_window shorter 3";
+    };
+    # theme = "Jet Brains Dracula";
+  };
+  # dont think I would need these if it worked in home manager.
+  # had to manually install kitty then specifiy config files here.
+  # see kitty docs for install instructions.
+  home.file.".config/kitty/kitty.conf".text = builtins.readFile ./apps/kitty/kitty.conf;
+  home.file.".config/kitty/startup.conf".text = builtins.readFile ./apps/kitty/startup.conf;
+  home.file.".config/kitty/theme.conf".text = builtins.readFile ./apps/kitty/theme.conf;
+
+  home.file.".ghci".source = ''
+    :def! hoogle \s -> return $ ":! hoogle search --colour --count=15 \"" ++ s ++ "\""
+    :def! doc \s -> return $ ":! hoogle search --colour --info \"" ++ s ++ "\""
+  '';
+
   home.packages = with pkgs; [
-    # java
-    jdk13
-    maven
-
-    # utils
     xclip
-    htop
-    jq
-    wget
-    zip
-    unzip
     tree
-    keepassxc
-
-    # dev
-    tmux
-    tmuxinator
-    meld
+    jq
+    nixpkgs-fmt
+    git
+    maven
+    jdk18
     docker-compose
     insomnia
-    my-vscode # uses overlays.nix
-    jetbrains.idea-ultimate
-    graphviz
-    nodejs-12_x
-
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    jetbrains.idea-community
+    python3
+    #myHaskellEnv
+    haskellPackages.haskell-language-server
+    cabal2nix
+    nix-prefetch-git
+    cabal-install
     # haskell
-    haskell-ghc
-    daml
+    # haskell-ghc
+  ]; # ++ haskell-env;
 
-    # the usual stuff
-    google-chrome
-    slack
 
-  ] ++ haskell-env;
+  #home.file.".IntelliJIdea2019.2/config/templates/output.xml".source = ./apps/intellij/templates.xml;
 
-  news.display = "silent";
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    BROWSER = "google-chrome";
+    TERMINAL = "kitty";
+  };
 
-  home.file.".config/Code/User/settings.json".text = builtins.toJSON vscodeConfig.settings;
-  home.file.".config/Code/User/keybindings.json".text = builtins.toJSON vscodeConfig.keybindings;
-  home.file.".config/Code/User/snippets/my.code-snippets".text = builtins.toJSON vscodeConfig.snippets;
-  home.file.".ghcid".text = ghcidConfig.dotGhcidFile;
-  home.file.".ghci".source = ./apps/ghci;
-
-  home.file.".tmuxinator.yml".source = ./apps/tmux/tmuxinator.yml;
-  home.file.".IntelliJIdea2019.2/config/templates/output.xml".source = ./apps/intellij/templates.xml;
+  home.stateVersion = "22.05";
+  home.username = "matt";
+  home.homeDirectory = /home/matt;
 }

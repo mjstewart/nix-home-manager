@@ -1,4 +1,4 @@
-{ google-chrome, my-vscode, meld }:
+{ google-chrome, meld }:
 
 {
   programs.git = {
@@ -35,12 +35,5 @@
         keepBackup = false;
       };
     };
-
-    ignores = [
-      "*.swp"
-      "*~"
-      "#*"
-      ".DS_Store"
-    ];
   };
 }

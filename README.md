@@ -2,26 +2,8 @@
 
 This is my personal configuration for [home manager](https://github.com/rycee/home-manager)
 
-# tips
 
-### updating nix channels
-
-make sure nix channel is set to the latest, otherwise you could be referring to old
-package versions.
-
-eg: see what versions are current by checking.
-
-https://nixos.org/nixos/packages.html
-https://github.com/rycee/home-manager
-
-eg if `nixos-20.03` is latest then its likely you will want to update home manager
-channel to use this.
-
-```
-nix-channel --add https://github.com/rycee/home-manager/archive/release-20.03.tar.gz home-manager
-nix-channel --update
-home-manager switch
-```
+By default, `import <nixpkgs> { }` will implicitly use an empty or user-defined configuration in `~/.nixpkgs/config.nix`
 
 Also may need to increase size of `tmpfs`, as nix uses this as part of building the store.
 look for something like /run/user/1000
@@ -31,14 +13,44 @@ df -h
 sudo mount -o remount,size=2G /run/user/1000
 ```
 
-### cachix
+## Learning
+
+- https://nix.dev/recommended-reading
+- https://haskell4nix.readthedocs.io/nixpkgs-users-guide.htmlhttps://haskell4nix.readthedocs.io/
+- https://ryantm.github.io/nixpkgs/builders/trivial-builders/#chap-trivial-builders
+
+## Random stuff
+
+You can use 'trival builders' https://ryantm.github.io/nixpkgs/builders/trivial-builders/#chap-trivial-builders
+to write files to the nix store and create bash scripts.
 
 ```
-nix-env -iA cachix -f https://cachix.org/api/v1/install
+x = pkgs.writeShellScriptBin "my-file"
+''
+echo "hello my file 243"
+'';
 
+my-cow-message = pkgs.writeText "my-cow-message2"
+''
+hello matt!
+'';
+
+my-cow = pkgs.writeShellApplication {
+  name = "my-cow-example";
+  runtimeInputs = [ pkgs.cowsay pkgs.bat ];
+  text =
+  ''
+  cowsay < ${my-cow-message}
+  '';
+};
+
+
+# in terminal
+./my-cow-example
 ```
 
 ### ghc
+
 
 ghc version has its own packages. Be careful, if you use a new ghc, you could get errors since older packages
 might not support this ghc yet.

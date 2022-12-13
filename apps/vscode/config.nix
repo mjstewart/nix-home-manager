@@ -1,4 +1,4 @@
-{ lib, zsh }:
+{ zsh }:
 
 {
   settings = {
@@ -15,15 +15,7 @@
     };
 
     exclude = {
-      "**/.bazel-cache" = true;
-      "**/bazel*" = true;
-      "**/bower_components" = true;
       "**/node_modules" = true;
-    };
-
-    watcherExclude = {
-      "**/.bazel-cache" = true;
-      "**/bazel*" = true;
     };
 
     editor = {
@@ -48,14 +40,8 @@
       tree.indent = 20;
     };
 
-
     search = {
       location = "panel";
-    };
-
-    daml = {
-      telemetry = "Disable";
-      debug = true;
     };
 
     extensions = {
@@ -64,31 +50,10 @@
 
     update.mode = "none";
 
-    terminal.integrated.shell.linux = "${zsh}/bin/zsh";
+    terminal.integrated = {
+      shell.linux = "${zsh}/bin/zsh";
+      copyOnSelection = true;
+    };
     alignment.operatorPadding = "left";
   };
-
-  snippets = {
-    "exercise ignore contract id" = {
-      scope = "daml";
-      prefix = "exercise_";
-      body = [
-        "exercise \${1:contractId} \${2:Transfer} with \${3:newOwner} = \${4:value}"
-        "$5"
-      ];
-    };
-  };
-
-  keybindings = [
-    {
-      key = "ctrl+,";
-      command = "workbench.action.focusActiveEditorGroup";
-      when ="terminalFocus";
-    }
-    {
-      key = "ctrl+,";
-      command = "workbench.action.terminal.focus";
-      when = "!terminalFocus";
-    }
-  ];
 }

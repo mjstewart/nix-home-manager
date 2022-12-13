@@ -4,10 +4,6 @@
   programs.vim = {
     enable = true;
 
-    # We need the + register, as it is special in the sense that it’s associated with the system clipboard.
-    #
-    # from vim = "+y
-    # into vim = "+p
     extraConfig = ''
       set clipboard=unnamedplus
 

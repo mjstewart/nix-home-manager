@@ -19,6 +19,17 @@ sudo mount -o remount,size=2G /run/user/1000
 - https://haskell4nix.readthedocs.io/nixpkgs-users-guide.htmlhttps://haskell4nix.readthedocs.io/
 - https://ryantm.github.io/nixpkgs/builders/trivial-builders/#chap-trivial-builders
 
+
+## Haskell
+
+https://discourse.nixos.org/t/nix-haskell-development-2020/6170
+
+
+### pin nixpkgs version
+
+nix-prefetch-git https://github.com/nixos/nixpkgs-channels.git refs/heads/nixos-20.03 > nix/nixos-20.03.json
+
+
 ## Random stuff
 
 You can use 'trival builders' https://ryantm.github.io/nixpkgs/builders/trivial-builders/#chap-trivial-builders

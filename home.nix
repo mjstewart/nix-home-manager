@@ -40,6 +40,12 @@ in
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       # to get the hashes, rerun home manager and get expected hash
       {
+        name = "stylish-haskell";
+        version = "0.0.10";
+        publisher = "vigoo";
+        sha256 = "sha256-GGRhaHhpeMgfC517C3kDUZwzdHbY8L/YePPVf6xie/4=";
+      }
+      {
         name = "nix-ide";
         version = "0.2.1";
         publisher = "jnoortheen";
@@ -110,7 +116,9 @@ in
   home.file.".config/kitty/startup.conf".text = builtins.readFile ./apps/kitty/startup.conf;
   home.file.".config/kitty/theme.conf".text = builtins.readFile ./apps/kitty/theme.conf;
 
-  home.file.".ghci".source = ''
+  home.file.".ghci".text = ''
+    :set prompt "λ> "
+    :set -XOverloadedStrings
     :def! hoogle \s -> return $ ":! hoogle search --colour --count=15 \"" ++ s ++ "\""
     :def! doc \s -> return $ ":! hoogle search --colour --info \"" ++ s ++ "\""
   '';
@@ -129,10 +137,11 @@ in
     jetbrains.idea-community
     python3
     #myHaskellEnv
-    haskellPackages.haskell-language-server
-    cabal2nix
-    nix-prefetch-git
-    cabal-install
+    # haskellPackages.haskell-language-server
+    # haskellPackages.hoogle
+    # cabal2nix
+    # nix-prefetch-git
+    # cabal-install
     # haskell
     # haskell-ghc
   ]; # ++ haskell-env;

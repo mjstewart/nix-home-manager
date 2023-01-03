@@ -55,5 +55,9 @@
       copyOnSelection = true;
     };
     alignment.operatorPadding = "left";
+
+    haskell = {
+      formattingProvider = "stylish-haskell";
+    };
   };
 }

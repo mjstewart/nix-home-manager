@@ -39,12 +39,12 @@ in
       haskell.haskell
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       # to get the hashes, rerun home manager and get expected hash
-      {
-        name = "stylish-haskell";
-        version = "0.0.10";
-        publisher = "vigoo";
-        sha256 = "sha256-GGRhaHhpeMgfC517C3kDUZwzdHbY8L/YePPVf6xie/4=";
-      }
+      # {
+      #   name = "stylish-haskell";
+      #   version = "0.0.10";
+      #   publisher = "vigoo";
+      #   sha256 = "sha256-GGRhaHhpeMgfC517C3kDUZwzdHbY8L/YePPVf6xie/4=";
+      # }
       {
         name = "nix-ide";
         version = "0.2.1";
@@ -76,6 +76,11 @@ in
       fzf-vim
       vim-nix
     ];
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   programs.kitty = {
@@ -136,6 +141,7 @@ in
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     jetbrains.idea-community
     python3
+    direnv
     #myHaskellEnv
     # haskellPackages.haskell-language-server
     # haskellPackages.hoogle
